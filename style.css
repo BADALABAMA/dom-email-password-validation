@@ -42,3 +42,11 @@ p {
 
   color: black;
 }
+
+.img-valid,
+.img-invalid {
+  display: none;
+  position: relative;
+  left: 20rem;
+  width: 1000px;
+}

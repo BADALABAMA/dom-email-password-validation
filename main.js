@@ -1,11 +1,12 @@
 const app = document.querySelector('#app');
 function Tag(attrs = {}) {
-  const { tag, className, id, textContent, placeholder } = attrs;
+  const { tag, className, id, textContent, placeholder, src } = attrs;
   const element = document.createElement(tag);
   if (className) element.className = className;
   if (id) element.id = id;
   if (placeholder) element.placeholder = placeholder;
   if (textContent) element.textContent = textContent;
+  if (src) element.src = src;
 
   return element;
 }
@@ -29,10 +30,24 @@ const passwordInput = Tag({
   id: 'password-input',
   placeholder: 'Password',
 });
+const imageValid = Tag({
+  tag: 'img',
+  className: 'img-valid',
+  id: 'img',
+  src: 'https://media.tenor.com/DXv8UHVPtaIAAAAd/billy-herrington-drinks-beer-billy-herrington.gif',
+});
+const imageInvalid = Tag({
+  tag: 'img',
+  className: 'img-invalid',
+  id: 'img-invalid',
+  src: 'https://i.kym-cdn.com/photos/images/newsfeed/001/344/529/1b2.gif',
+});
 
 form.append(
   emailInput,
   passwordInput,
+  imageValid,
+  imageInvalid,
   Tag({
     tag: 'button',
     className: 'button',
@@ -46,6 +61,8 @@ app.append(form);
 const email = document.querySelector('#email-input');
 const password = document.querySelector('#password-input');
 const btn = document.querySelector('#submit-btn');
+const img = document.querySelector('#img-valid');
+const imgNoAcces = document.querySelector('#img-invalid');
 
 email.addEventListener('input', (e) => {
   e.preventDefault();
@@ -67,9 +84,14 @@ password.addEventListener('input', (e) => {
   }
 });
 
-btn.addEventListener('click', () => {
+btn.addEventListener('click', (e) => {
+  e.preventDefault();
   if (validateEmail(email) && validatePassword(password)) {
     alert('Welcome to the 300$ dungeon');
+    img.style.display = 'flex';
+  } else {
+    alert("You don't have access! Go away!");
+    imgNoAcces.style.display = 'flex';
   }
 });
 
