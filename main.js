@@ -61,7 +61,7 @@ app.append(form);
 const email = document.querySelector('#email-input');
 const password = document.querySelector('#password-input');
 const btn = document.querySelector('#submit-btn');
-const img = document.querySelector('#img-valid');
+const img = document.querySelector('#img');
 const imgNoAcces = document.querySelector('#img-invalid');
 
 email.addEventListener('input', (e) => {
@@ -88,9 +88,12 @@ btn.addEventListener('click', (e) => {
   e.preventDefault();
   if (validateEmail(email) && validatePassword(password)) {
     alert('Welcome to the 300$ dungeon');
+
     img.style.display = 'flex';
-  } else {
+  }
+  if (!validateEmail(email) && !validatePassword(password)) {
     alert("You don't have access! Go away!");
+
     imgNoAcces.style.display = 'flex';
   }
 });
